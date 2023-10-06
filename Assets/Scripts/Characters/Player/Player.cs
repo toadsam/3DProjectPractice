@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public ForceReceiver ForceReceiver { get; private set; }
+
     [field: Header("Animations")]
     [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
 
@@ -29,6 +32,7 @@ public class Player : MonoBehaviour
         Controller = GetComponent<CharacterController>();
 
         stateMachine = new PlayerStateMachine(this);
+        ForceReceiver = GetComponent<ForceReceiver>();
     }
 
     private void Start()

@@ -74,7 +74,7 @@ public class PlayerBaseState : IState //구성하면서 필요한 베이스
     {
         float movementSpeed = GetMovemenetSpeed();
         stateMachine.Player.Controller.Move(
-            (movementDirection * movementSpeed) * Time.deltaTime
+            ((movementDirection * movementSpeed) + stateMachine.Player.ForceReceiver.Movement) * Time.deltaTime
             );  //이동방향과 스피드를 곱해주기
     }
 
@@ -104,11 +104,13 @@ public class PlayerBaseState : IState //구성하면서 필요한 베이스
         stateMachine.Player.Animator.SetBool(animationHash, false);
     }
 
-    protected virtual void AddInputActionsCallbacks()  //공용으로 사용되는 것들에 대하여 사용된다, 골백들을 연결하거나 해제
+    protected virtual void AddInputActionsCallbacks()  //공용으로 사용되는 것들에 대하여 사용된다, 골백들을 연결하거나 해제  //콜백 함수
     {
         PlayerInput input = stateMachine.Player.Input;
-        input.PlayerActions.Movement.canceled += OnMovementCanceled;
+        input.PlayerActions.Movement.canceled += OnMovementCanceled; //무브먼트즉 이동키중 아무거나 빠졌을때
         input.PlayerActions.Run.started += OnRunStarted;
+
+        stateMachine.Player.Input.PlayerActions.Jump.started += OnJumpStarted;
     }
 
     protected virtual void RemoveInputActionsCallbacks()
@@ -116,6 +118,8 @@ public class PlayerBaseState : IState //구성하면서 필요한 베이스
         PlayerInput input = stateMachine.Player.Input;
         input.PlayerActions.Movement.canceled -= OnMovementCanceled;
         input.PlayerActions.Run.started -= OnRunStarted;
+
+        stateMachine.Player.Input.PlayerActions.Jump.started -= OnJumpStarted;
 
     }
 
@@ -125,6 +129,11 @@ public class PlayerBaseState : IState //구성하면서 필요한 베이스
     }
 
     protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
+    {
+
+    }
+
+    protected virtual void OnJumpStarted(InputAction.CallbackContext context)
     {
 
     }

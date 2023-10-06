@@ -12,7 +12,7 @@ public class PlayerWalkState : PlayerGroundedState
     public override void Enter()
     {
         stateMachine.MovementSpeedModifier = groundData.WalkSpeedModifier;
-        base.Enter();
+        base.Enter(); //그라운드로 가서 엔터켜주고 그리고 워크켜주고..
         StartAnimation(stateMachine.Player.AnimationData.WalkParameterHash);
     }
 
