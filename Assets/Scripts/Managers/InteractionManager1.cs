@@ -17,7 +17,8 @@ public class InteractionManager1 : MonoBehaviour
         {
             _nearObject = other.gameObject;
             _nearItemObject = _nearObject.GetComponent<ItemObject>();
-            SetPromptText();
+          //  SetPromptText();
+            Debug.Log(1);
         }
     }
 
@@ -27,7 +28,7 @@ public class InteractionManager1 : MonoBehaviour
         {
             _nearObject = null;
             _nearItemObject = null;
-            OffPromptText();
+          //  OffPromptText();
         }
     }
 
