@@ -75,7 +75,7 @@ public class PlayerComboAttackState : PlayerAttackState
         {
             if (alreadyApplyCombo)
             {
-                stateMachine.ComboIndex = attackInfoData.ComboStateIndex;
+                stateMachine.ComboIndex = attackInfoData.ComboStateIndex;            
                 stateMachine.ChangeState(stateMachine.ComboAttackState);
             }
             else
