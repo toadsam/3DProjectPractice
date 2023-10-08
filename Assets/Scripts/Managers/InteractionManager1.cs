@@ -17,8 +17,8 @@ public class InteractionManager1 : MonoBehaviour
         {
             _nearObject = other.gameObject;
             _nearItemObject = _nearObject.GetComponent<ItemObject>();
-          //  SetPromptText();
-            Debug.Log(1);
+            SetPromptText();
+            
         }
     }
 
@@ -28,12 +28,13 @@ public class InteractionManager1 : MonoBehaviour
         {
             _nearObject = null;
             _nearItemObject = null;
-          //  OffPromptText();
+            OffPromptText();
         }
     }
 
     public void SetPromptText()
     {
+        Debug.Log(1);
         press.gameObject.SetActive(true);
         promptText.text = _nearItemObject.item.displayName;
     }
@@ -50,6 +51,19 @@ public class InteractionManager1 : MonoBehaviour
             _nearItemObject.OnInteract();
             Destroy(_nearObject);
             press.gameObject.SetActive(false);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (_nearObject != null)
+            {
+                _nearItemObject.OnInteract();
+                Destroy(_nearObject);
+                press.gameObject.SetActive(false);
+            }
         }
     }
 }

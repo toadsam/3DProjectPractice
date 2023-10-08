@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14472ee40285a0843abb9bfd347f919e, type: 3}
-  m_Name: ItemData
+  m_Name: Staff
   m_EditorClassIdentifier: 
-  displayName: 
-  description: 
-  type: 0
-  icon: {fileID: 0}
-  dropPrefab: {fileID: 0}
+  displayName: "\uC2A4\uD0DC\uD504"
+  description: "\uBD88\uC758 \uC18D\uC131\uC744 \uAC00\uC84C\uB2E4. \uC5C4\uCCAD\uB09C
+    \uD654\uC5FC\uC758 \uC2A4\uD0AC\uC744 \uAC00\uC9C0\uACE0\uC788\uB2E4."
+  type: 1
+  icon: {fileID: 21300000, guid: d659f7396cd57754eba78763cf986c51, type: 3}
+  dropPrefab: {fileID: 2083943641721818151, guid: b9e9b9817b565da4c87dd7d4d36b234b,
+    type: 3}
   canStack: 0
   maxStackAmount: 0
   consumables: []
