@@ -10,6 +10,10 @@ public class InteractionManager1 : MonoBehaviour
     private ItemObject _nearItemObject;
     public GameObject press;
     public TextMeshProUGUI promptText;
+    public Camera QuestCamera;
+
+    public GameObject QuestObject;
+
 
     public void OnTriggerEnter(Collider other)
     {
@@ -20,6 +24,12 @@ public class InteractionManager1 : MonoBehaviour
             SetPromptText();
             
         }
+        if(other.tag == "NPC")
+        {
+            _nearObject = other.gameObject;
+            press.gameObject.SetActive(true);
+            promptText.text = "대화하기";
+        }
     }
 
     public void OnTriggerExit(Collider other)
@@ -29,6 +39,12 @@ public class InteractionManager1 : MonoBehaviour
             _nearObject = null;
             _nearItemObject = null;
             OffPromptText();
+        }
+
+        if (other.tag == "NPC")
+        {
+            press.gameObject.SetActive(false);
+            promptText.text = "";
         }
     }
 
@@ -44,7 +60,7 @@ public class InteractionManager1 : MonoBehaviour
         press.gameObject.SetActive(false);
     }
 
-    public void OnInteractInput(InputAction.CallbackContext context)
+    public void OnInteractInput(InputAction.CallbackContext context)  //인터렉션부분을 오버라이드해서 구현하든 경우를 나눠서 구분하든 해보기
     {
         if (_nearObject != null && context.phase == InputActionPhase.Started)
         {
@@ -60,10 +76,20 @@ public class InteractionManager1 : MonoBehaviour
         {
             if (_nearObject != null)
             {
-                _nearItemObject.OnInteract();
-                Destroy(_nearObject);
-                press.gameObject.SetActive(false);
+                if (_nearObject.tag == "NPC")  // 이런식으로 하면 코드가 지저분할 듯
+                {
+                    QuestObject.SetActive(true);
+                    QuestCamera.enabled = true;
+                }
+                else
+                {
+                    _nearItemObject.OnInteract();
+                    Destroy(_nearObject);
+                    press.gameObject.SetActive(false);
+                }
+                
             }
+           
         }
     }
 }

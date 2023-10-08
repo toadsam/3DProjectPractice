@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+      //  Animator.SetTrigger("Dodge");
         Cursor.lockState = CursorLockMode.Locked;  //커서를 사라지도록
         stateMachine.ChangeState(stateMachine.IdleState);
     }
