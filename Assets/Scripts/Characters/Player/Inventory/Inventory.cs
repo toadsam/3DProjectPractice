@@ -180,10 +180,10 @@ public class Inventory : MonoBehaviour
             selectedItemStatNames.text += selectedItem.item.consumables[i].type.ToString() + "\n";
             selectedItemStatValues.text += selectedItem.item.consumables[i].value.ToString() + "\n";
         }
-
-        useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
-        equipButton.SetActive(selectedItem.item.type == ItemType.Equipable && !uiSlots[index].equipped);
-        unEquipButton.SetActive(selectedItem.item.type == ItemType.Equipable && uiSlots[index].equipped);
+        useButton.SetActive(true);
+      //  useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
+      //  equipButton.SetActive(selectedItem.item.type == ItemType.Equipable && !uiSlots[index].equipped);
+      // unEquipButton.SetActive(selectedItem.item.type == ItemType.Equipable && uiSlots[index].equipped);
         dropButton.SetActive(true);
     }
 
@@ -197,8 +197,8 @@ public class Inventory : MonoBehaviour
         selectedItemStatValues.text = string.Empty;
 
         useButton.SetActive(false);
-        equipButton.SetActive(false);
-        unEquipButton.SetActive(false);
+       // equipButton.SetActive(false);
+       // unEquipButton.SetActive(false);
         dropButton.SetActive(false);
     }
 
