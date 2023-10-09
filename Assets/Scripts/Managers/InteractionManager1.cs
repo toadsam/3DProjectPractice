@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InteractionManager1 : MonoBehaviour
 {
@@ -13,8 +14,18 @@ public class InteractionManager1 : MonoBehaviour
     public Camera QuestCamera;
 
     public GameObject QuestObject;
+    public TalkManager talkManager;
+    public TextMeshProUGUI talkText;
+    public int talkIndex;
+    public bool isAction;
+    //public GameObject nextBtn;
+    public Button nextBtn;
 
+    public void Awake()
+    {
+        isAction = false;
 
+    }
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Interactable")
@@ -50,7 +61,6 @@ public class InteractionManager1 : MonoBehaviour
 
     public void SetPromptText()
     {
-        Debug.Log(1);
         press.gameObject.SetActive(true);
         promptText.text = _nearItemObject.item.displayName;
     }
@@ -70,16 +80,54 @@ public class InteractionManager1 : MonoBehaviour
         }
     }
 
+    public void Talk(int id, bool isNPC)
+    {
+        string talkData = talkManager.GetTalk(id,talkIndex);
+        if (talkData == null) //대화의 내용이 더이상 없다면
+        {
+            isAction = false; //대화가 끝났다.
+            QuestObject.SetActive(isAction);
+            QuestCamera.enabled = isAction;
+            Debug.Log(isAction);
+            return; //VOID에서 return은 강제 종료역할
+        }
+        if(isNPC) 
+        {
+            talkText.text = talkData;
+        }
+        else
+        {
+            talkText.text = talkData;
+        }
+        isAction = true; //대화중이다
+        talkIndex++;
+    }
+
+    public void NextTalk()
+    {
+        //Talk(id,isNPC);
+        
+    }
+    
+
+
+
     private void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
+            
             if (_nearObject != null)
             {
                 if (_nearObject.tag == "NPC")  // 이런식으로 하면 코드가 지저분할 듯
                 {
-                    QuestObject.SetActive(true);
-                    QuestCamera.enabled = true;
+                    ObgData obgData = _nearObject.GetComponent<ObgData>();
+                    Debug.Log("엔피씨가 맞아");
+                    Talk(obgData.id, obgData.isNpc);
+                    nextBtn.onClick.AddListener(() => Talk(obgData.id, obgData.isNpc)); //버튼을 누르면 다음으로 넘어감.
+                    QuestObject.SetActive(isAction);
+                    QuestCamera.enabled = isAction; 
                 }
                 else
                 {
