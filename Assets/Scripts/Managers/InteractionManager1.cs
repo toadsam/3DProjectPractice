@@ -14,6 +14,7 @@ public class InteractionManager1 : MonoBehaviour
     public Camera QuestCamera;
 
     public GameObject QuestObject;
+    public QuestManager questManager;  
     public TalkManager talkManager;
     public TextMeshProUGUI talkText;
     public int talkIndex;
@@ -82,18 +83,21 @@ public class InteractionManager1 : MonoBehaviour
 
     public void Talk(int id, bool isNPC)
     {
-        string talkData = talkManager.GetTalk(id,talkIndex);
+        int questTalkIndex = questManager.GetQuestTalkIndex(id); //npcid를 통해 퀘스트 번호를 가져옴 
+        string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);//퀘스트번호 + npcid = 퀘스트 대화 데이터 id
         if (talkData == null) //대화의 내용이 더이상 없다면
         {
             isAction = false; //대화가 끝났다.
             QuestObject.SetActive(isAction);
             QuestCamera.enabled = isAction;
             Debug.Log(isAction);
+            talkIndex = 0;
+           // questManager.CheckQuest();
             return; //VOID에서 return은 강제 종료역할
         }
         if(isNPC) 
         {
-            talkText.text = talkData;
+            talkText.text = talkData;      
         }
         else
         {
@@ -125,7 +129,7 @@ public class InteractionManager1 : MonoBehaviour
                     ObgData obgData = _nearObject.GetComponent<ObgData>();
                     Debug.Log("엔피씨가 맞아");
                     Talk(obgData.id, obgData.isNpc);
-                    nextBtn.onClick.AddListener(() => Talk(obgData.id, obgData.isNpc)); //버튼을 누르면 다음으로 넘어감.
+                   // nextBtn.onClick.AddListener(() => Talk(obgData.id, obgData.isNpc)); //버튼을 누르면 다음으로 넘어감.
                     QuestObject.SetActive(isAction);
                     QuestCamera.enabled = isAction; 
                 }
