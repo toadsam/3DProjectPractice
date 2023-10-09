@@ -92,7 +92,7 @@ public class InteractionManager1 : MonoBehaviour
             QuestCamera.enabled = isAction;
             Debug.Log(isAction);
             talkIndex = 0;
-           // questManager.CheckQuest();
+            questManager.CheckQuest(id);
             return; //VOID에서 return은 강제 종료역할
         }
         if(isNPC) 
