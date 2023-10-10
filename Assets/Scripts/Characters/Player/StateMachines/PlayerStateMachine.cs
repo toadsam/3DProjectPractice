@@ -12,7 +12,13 @@ public class PlayerStateMachine : StateMachine
     public PlayerJumpState JumpState { get; }
     public PlayerFallState FallState { get; }
 
+    public PlayerDodgeState DodgeState { get; }
+
+    public PlayerBlockState BlockState { get; }
+
     public PlayerComboAttackState ComboAttackState { get; }
+
+    public PlayerSkillState SkillState { get; }
     public Player Player { get; }
 
     // States
@@ -40,8 +46,9 @@ public class PlayerStateMachine : StateMachine
         JumpState = new PlayerJumpState(this);
         FallState = new PlayerFallState(this);
         ComboAttackState = new PlayerComboAttackState(this);
-
-
+        DodgeState = new PlayerDodgeState(this);
+        BlockState = new PlayerBlockState(this);
+        SkillState  = new PlayerSkillState(this);
         MainCameraTransform = Camera.main.transform;
 
         MovementSpeed = player.Data.GroundedData.BaseSpeed;

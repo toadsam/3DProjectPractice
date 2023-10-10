@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -7,6 +8,9 @@ public class QuestManager : MonoBehaviour
     public int questId; //퀘스트의 종류를 구분하는 변수 
     public int questActionIndex; // npc의 인덱스번호를 표시하는 곳
     Dictionary<int, QuestData> questList;
+    public GameObject questState1;
+    public TextMeshProUGUI questStateText1;
+
 
     private void Awake()
     {

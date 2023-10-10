@@ -65,6 +65,18 @@ public class PlayerGroundedState : PlayerBaseState
         stateMachine.ChangeState(stateMachine.JumpState);
     }
 
+    protected override void OnBlockStarted(InputAction.CallbackContext context)
+    {
+        stateMachine.ChangeState(stateMachine.BlockState);
+    }
+    protected override void OnDodgeStarted(InputAction.CallbackContext context)
+    {
+        stateMachine.ChangeState(stateMachine.DodgeState);
+    }
+    protected override void OnSkillStarted(InputAction.CallbackContext context)
+    {
+        stateMachine.ChangeState(stateMachine.SkillState);
+    }
     protected virtual void OnAttack()
     {
         stateMachine.ChangeState(stateMachine.ComboAttackState);

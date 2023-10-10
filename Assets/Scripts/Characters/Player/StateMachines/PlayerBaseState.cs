@@ -111,8 +111,12 @@ public class PlayerBaseState : IState //구성하면서 필요한 베이스
         input.PlayerActions.Run.started += OnRunStarted;
 
         stateMachine.Player.Input.PlayerActions.Jump.started += OnJumpStarted;
+        stateMachine.Player.Input.PlayerActions.Dodge.started += OnDodgeStarted;
         stateMachine.Player.Input.PlayerActions.Attack.performed += OnAttackPerformed;
         stateMachine.Player.Input.PlayerActions.Attack.canceled += OnAttackCanceled;
+        stateMachine.Player.Input.PlayerActions.Block.started += OnBlockStarted;
+        stateMachine.Player.Input.PlayerActions.Skill.started += OnSkillStarted;
+
     }
 
     protected virtual void RemoveInputActionsCallbacks()
@@ -120,14 +124,23 @@ public class PlayerBaseState : IState //구성하면서 필요한 베이스
         PlayerInput input = stateMachine.Player.Input;
         input.PlayerActions.Movement.canceled -= OnMovementCanceled;
         input.PlayerActions.Run.started -= OnRunStarted;
-
+        stateMachine.Player.Input.PlayerActions.Block.started -= OnBlockStarted;
         stateMachine.Player.Input.PlayerActions.Jump.started -= OnJumpStarted;
-
+        stateMachine.Player.Input.PlayerActions.Dodge.started -= OnDodgeStarted;
         stateMachine.Player.Input.PlayerActions.Attack.performed -= OnAttackPerformed;
         stateMachine.Player.Input.PlayerActions.Attack.canceled -= OnAttackCanceled;
+        stateMachine.Player.Input.PlayerActions.Skill.canceled -= OnSkillStarted;
     }
 
     protected virtual void OnRunStarted(InputAction.CallbackContext context)
+    {
+
+    }
+    protected virtual void OnDodgeStarted(InputAction.CallbackContext context)
+    {
+
+    }
+    protected virtual void OnBlockStarted(InputAction.CallbackContext context)
     {
 
     }
@@ -141,6 +154,7 @@ public class PlayerBaseState : IState //구성하면서 필요한 베이스
     {
 
     }
+
 
     protected void ForceMove()
     {
@@ -156,6 +170,12 @@ public class PlayerBaseState : IState //구성하면서 필요한 베이스
     {
         stateMachine.IsAttacking = false;
     }
+
+    protected virtual void OnSkillStarted(InputAction.CallbackContext obj)
+    {
+        
+    }
+    
 
     protected float GetNormalizedTime(Animator animator, string tag)
     {

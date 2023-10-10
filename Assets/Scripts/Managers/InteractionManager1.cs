@@ -22,6 +22,7 @@ public class InteractionManager1 : MonoBehaviour
     //public GameObject nextBtn;
     public Button nextBtn;
 
+
     public void Awake()
     {
         isAction = false;
