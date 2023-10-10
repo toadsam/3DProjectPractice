@@ -110,8 +110,8 @@ NavMeshSettings:
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
-    ledgeDropHeight: 0
-    maxJumpAcrossDistance: 0
+    ledgeDropHeight: 2
+    maxJumpAcrossDistance: 2
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 51b8496ba613ed943af238162687f3e6, type: 2}
 --- !u!1 &43081048
 GameObject:
   m_ObjectHideFlags: 0
@@ -6245,9 +6245,9 @@ Mesh:
       format: 0
       dimension: 2
     - stream: 0
-      offset: 0
+      offset: 48
       format: 0
-      dimension: 0
+      dimension: 2
     - stream: 0
       offset: 0
       format: 0
@@ -6280,8 +6280,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 432
-    _typelessdata: 747b33c217b7d1388a4c3ac1000000000000803f000000000000803f0000000000000000000080bf747b33c28a4c3ac1747b33c217b7d13876b35541000000000000803f000000000000803f0000000000000000000080bf747b33c276b35541e9f69ec117b7d1388a4c3ac1000000000000803f000000000000803f0000000000000000000080bfe9f69ec18a4c3ac1e9f69ec117b7d13876b35541000000000000803f000000000000803f0000000000000000000080bfe9f69ec176b35541747b33c217b7d138de6c1942000000000000803f000000000000803f0000000000000000000080bf747b33c2de6c1942e9f69ec117b7d138de6c1942000000000000803f000000000000803f0000000000000000000080bfe9f69ec1de6c19425c24a44017b7d1388a4c3ac1000000000000803f000000000000803f0000000000000000000080bf5c24a4408a4c3ac15c24a44017b7d13876b35541000000000000803f000000000000803f0000000000000000000080bf5c24a44076b355415c24a44017b7d138de6c1942000000000000803f000000000000803f0000000000000000000080bf5c24a440de6c1942
+    m_DataSize: 504
+    _typelessdata: 747b33c217b7d1388a4c3ac1000000000000803f000000000000803f0000000000000000000080bf747b33c28a4c3ac117d7a33c0bd7a33c747b33c217b7d13876b35541000000000000803f000000000000803f0000000000000000000080bf747b33c276b355416a32003f0bd7a33ce9f69ec117b7d1388a4c3ac1000000000000803f000000000000803f0000000000000000000080bfe9f69ec18a4c3ac111d7a33c5c32003fe9f69ec117b7d13876b35541000000000000803f000000000000803f0000000000000000000080bfe9f69ec176b355416a32003f5c32003f747b33c217b7d138de6c1942000000000000803f000000000000803f0000000000000000000080bf747b33c2de6c19421b467b3f0bd7a33ce9f69ec117b7d138de6c1942000000000000803f000000000000803f0000000000000000000080bfe9f69ec1de6c19421b467b3f5c32003f5c24a44017b7d1388a4c3ac1000000000000803f000000000000803f0000000000000000000080bf5c24a4408a4c3ac10bd7a33c00467b3f5c24a44017b7d13876b35541000000000000803f000000000000803f0000000000000000000080bf5c24a44076b355416a32003f00467b3f5c24a44017b7d138de6c1942000000000000803f000000000000803f0000000000000000000080bf5c24a440de6c19421b467b3f00467b3f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -6342,7 +6342,7 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshMetrics[0]: 1
-  m_MeshMetrics[1]: 1
+  m_MeshMetrics[1]: 2704.005
   m_MeshOptimizationFlags: 1
   m_StreamData:
     serializedVersion: 2
@@ -7805,7 +7805,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1301886636
 Transform:
@@ -8090,7 +8090,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29242
+  m_Name: pb_Mesh29252
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -9172,7 +9172,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28972
+  m_Name: pb_Mesh28976
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -9415,6 +9415,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083943641721818151, guid: b9e9b9817b565da4c87dd7d4d36b234b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11131,6 +11136,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1982994582}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1636339965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636339960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 441943a117477f94f9e6555ad92fa82a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1577523835}
+  health: 10
+  walkSpeed: 10
+  runSpeed: 20
+  detectDistance: 20
+  safeDistance: 30
+  minWanderDistance: 10
+  maxWanderDistance: 30
+  minWanderWaitTime: 2
+  maxWanderWaitTime: 4
+  damage: 10
+  attackRate: 2
+  attackDistance: 15
+  fieldOfView: 120
+  collider: {fileID: 0}
+--- !u!195 &1636339966
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636339960}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1655232250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5054891358561600545, guid: 65a0122cf43d5d941bab27db4723082b,
@@ -13363,6 +13417,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1636339961}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21ef7b309796aca4f902760fea192578,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1636339965}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21ef7b309796aca4f902760fea192578,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1636339966}
   m_SourcePrefab: {fileID: 100100000, guid: 21ef7b309796aca4f902760fea192578, type: 3}
 --- !u!1 &2008788342
 GameObject:
@@ -13498,7 +13560,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29042
+  m_Name: pb_Mesh29046
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
