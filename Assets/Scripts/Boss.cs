@@ -362,6 +362,7 @@ public class Boss : MonoBehaviour
 
     IEnumerator DieAni() //±ôºıÀÌ´Â °ÍÀÓ.
     {
+        //agent.speed = 0;
         animator.SetTrigger("Die");
         //animator.SetBool("Die", true);
         yield return new WaitForSeconds(8f);
