@@ -28,6 +28,7 @@ public class Boss : MonoBehaviour
   
 
      public Player player;
+    public GameObject BossNpc;
    
 
     [Header("Stats")]
@@ -60,7 +61,7 @@ public class Boss : MonoBehaviour
 
     private NavMeshAgent agent;
     private Animator animator;
-    public Collider collider;
+    //public Collider collider;
     private SkinnedMeshRenderer[] meshRenderers;
 
     private void Awake()
@@ -130,9 +131,9 @@ public class Boss : MonoBehaviour
             agent.isStopped = true;  //데미지를 입하는 부분 
             if (Time.time - lastAttackTime > attackRate)
             {
-               
-                int AttackType = Random.Range(1, 5);
-                Debug.Log(AttackType);
+                animator.SetTrigger("Attack");
+               // int AttackType = Random.Range(1, 5);
+               // Debug.Log(AttackType);
 
                 lastAttackTime = Time.time;
                 // Player.health -= 10;//여기부분 스태틱으로 하기
@@ -140,32 +141,32 @@ public class Boss : MonoBehaviour
                 // PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(damage);
                 animator.speed = 1;
                 fieldOfView = 60f;
-                if (AttackType == 1)
-                {
-                    collider.enabled = true;
-                    attackRate = 3;
-                    animator.SetTrigger("Attack");
-                }
+                //if (AttackType == 1)
+                //{
+                //    collider.enabled = true;
+                //    attackRate = 3;
+                //    animator.SetTrigger("Attack");
+                //}
 
-                else if (AttackType == 2)
-                {
-                    attackRate = 5;
-                    collider.enabled = true;
-                    animator.SetTrigger("ClawAttack");
-                }
-                else if (AttackType == 3)
-                {
-                    attackRate = 8;
+                //else if (AttackType == 2)
+                //{
+                //    attackRate = 5;
+                //    collider.enabled = true;
+                //    animator.SetTrigger("ClawAttack");
+                //}
+                //else if (AttackType == 3)
+                //{
+                //    attackRate = 8;
                   
-                    animator.SetTrigger("Fiy");
-                }
-                else if (AttackType == 4)
-                {
-                    attackRate = 6;
-                    animator.SetTrigger("Call");
-                    Invoke("CallBabyDragon", 4);
+                //    animator.SetTrigger("Fiy");
+                //}
+                //else if (AttackType == 4)
+                //{
+                //    attackRate = 6;
+                //    animator.SetTrigger("Call");
+                //    Invoke("CallBabyDragon", 4);
                     
-                }
+                //}
                 fieldOfView = 120f;
             }
         }
@@ -175,18 +176,16 @@ public class Boss : MonoBehaviour
     {
         if (aiState == AIState.Wandering && agent.remainingDistance < 0.1f) //방황하는 중이고, 남은거리가 0.1보다 작다
         {
-            //Debug.Log("독수리꺼" + agent.remainingDistance);
+           
             SetState(AIState.Idle);
             Invoke("WanderToNewLocation", Random.Range(minWanderWaitTime, maxWanderWaitTime)); //새로운 로케이션하는 것이 지연시키는 것
         }
-        // Debug.Log("플레이어와의 거리 : " + playerDistance);
-        // Debug.Log("탐지 거리 : " + detectDistance);
-        // Debug.Log(playerDistance < detectDistance);
+        
 
 
         if (playerDistance < detectDistance)  //거리안에 들오았다면
         {
-            // Debug.Log("공격범위안에 왔어");
+            
             SetState(AIState.Attacking);
         }
     }
@@ -292,18 +291,20 @@ public class Boss : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            
-          //  Invoke("HideHPBar", 4);
-           // playerConditions.health.curValue -= 10f;
+            health -= 2;
+            Debug.Log("몬스터 체력 : " + health);
+            StartCoroutine(DamageFlash());
+            //  Invoke("HideHPBar", 4);
+            // playerConditions.health.curValue -= 10f;
             //Player.health -= 10;
-           // Debug.Log("일반스킬로의 체력" + playerConditions.health.curValue);
+            // Debug.Log("일반스킬로의 체력" + playerConditions.health.curValue);
         }
         if (other.tag == "Melee")
         {
-           
-          //  Invoke("HideHPBar", 4);
-          //  Weapon weapon = other.GetComponent<Weapon>();
-          //  health -= weapon.damage;
+            Debug.Log("나 닿았엉");
+            //  Invoke("HideHPBar", 4);
+            //  Weapon weapon = other.GetComponent<Weapon>();
+            health -= 2;
             Debug.Log("몬스터 체력 : " + health);
             StartCoroutine(DamageFlash());
         }
@@ -361,9 +362,11 @@ public class Boss : MonoBehaviour
 
     IEnumerator DieAni() //깜빡이는 것임.
     {
-        animator.SetBool("Die", true);
+        animator.SetTrigger("Die");
+        //animator.SetBool("Die", true);
         yield return new WaitForSeconds(8f);
-       // DropItem();
+        // DropItem();
+        BossNpc.SetActive(true);
         Destroy(gameObject);
     }
 

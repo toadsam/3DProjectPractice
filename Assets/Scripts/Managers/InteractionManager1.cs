@@ -22,6 +22,8 @@ public class InteractionManager1 : MonoBehaviour
     //public GameObject nextBtn;
     public Button nextBtn;
 
+    public GameObject Boss;
+
 
     public void Awake()
     {
@@ -85,9 +87,14 @@ public class InteractionManager1 : MonoBehaviour
     public void Talk(int id, bool isNPC)
     {
         int questTalkIndex = questManager.GetQuestTalkIndex(id); //npcid를 통해 퀘스트 번호를 가져옴 
+        
         string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);//퀘스트번호 + npcid = 퀘스트 대화 데이터 id
         if (talkData == null) //대화의 내용이 더이상 없다면
         {
+            if (questManager.GetQuestTalkIndex(id) == 10)
+            {
+                Boss.SetActive(true);
+            }
             isAction = false; //대화가 끝났다.
             QuestObject.SetActive(isAction);
             QuestCamera.enabled = isAction;

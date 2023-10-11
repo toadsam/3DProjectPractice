@@ -10,6 +10,7 @@ public class QuestManager : MonoBehaviour
     Dictionary<int, QuestData> questList;
     public GameObject questState1;
     public TextMeshProUGUI questStateText1;
+    public GameObject Boss;
 
 
     private void Awake()
@@ -26,6 +27,7 @@ public class QuestManager : MonoBehaviour
 
     public int GetQuestTalkIndex(int id) //npcid를 받고 퀘스트번호를 반환하는 함수 생성
     {
+        
         return questId + questActionIndex;
     }
 
