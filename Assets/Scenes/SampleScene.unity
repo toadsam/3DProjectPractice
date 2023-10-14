@@ -3084,7 +3084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &747734689
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8009,9 +8009,7 @@ MonoBehaviour:
   - {fileID: 934521277}
   - {fileID: 617433039}
   - {fileID: 1613444976}
-  inventoryWindow: {fileID: 0}
-  inventoryInfo: {fileID: 0}
-  dropPosition: {fileID: 161732730}
+  inventoryInfo: {fileID: 747734688}
   selectedItemName: {fileID: 868760879}
   selectedItemDescription: {fileID: 1115247490}
   selectedItemStatNames: {fileID: 1900529730}
@@ -8020,12 +8018,6 @@ MonoBehaviour:
   equipButton: {fileID: 0}
   unEquipButton: {fileID: 0}
   dropButton: {fileID: 1674261891}
-  onOpenInventory:
-    m_PersistentCalls:
-      m_Calls: []
-  onCloseInventory:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!136 &1577523838
 CapsuleCollider:
   m_ObjectHideFlags: 0
