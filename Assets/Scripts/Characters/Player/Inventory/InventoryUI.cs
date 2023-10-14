@@ -10,7 +10,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
-        inventoryPanel.SetActive(activeInventory);
+       // inventoryPanel.SetActive(activeInventory);
     }
 
     private void Update()

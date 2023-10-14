@@ -18,6 +18,7 @@ public class ItemSlotUI : MonoBehaviour
     private void Awake()
     {
         outline = GetComponent<Outline>();
+       // icon = GetComponent<Image>();
     }
 
     private void OnEnable()
@@ -41,8 +42,8 @@ public class ItemSlotUI : MonoBehaviour
     public void Clear()
     {
         curSlot = null;
-        icon.gameObject.SetActive(false);
-        quatityText.text = string.Empty;
+        //icon.gameObject.SetActive(false);
+       // quatityText.text = string.Empty;
     }
 
     public void OnButtonClick()

@@ -1,7 +1,9 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -18,10 +20,9 @@ public class Inventory : MonoBehaviour
     public ItemSlotUI[] uiSlots;
     public ItemSlot[] slots;
 
-    public GameObject inventoryWindow;
+   
     public GameObject inventoryInfo;
-    public Transform dropPosition;
-
+   
     [Header("Selected Item")]
     private ItemSlot selectedItem;
     private int selectedItemIndex;
@@ -36,25 +37,18 @@ public class Inventory : MonoBehaviour
 
     private int curEquipIndex;
    
-   // private PlayerController controller;
-    //private PlayerConditions condition;
 
-    [Header("Events")]
-    public UnityEvent onOpenInventory;  //이벤트들
-    public UnityEvent onCloseInventory;
+   
 
     public static Inventory instance;
 
 
     void Awake()
     {
-        instance = this;
-       // controller = GetComponent<PlayerController>();
-       // condition = GetComponent<PlayerConditions>();
+        instance = this;      
     }
     private void Start()
     {
-        inventoryWindow.SetActive(false);  //인벤토리 창 끄기
         slots = new ItemSlot[uiSlots.Length]; // 슬롯을 담는 배열 생성
 
         for (int i = 0; i < slots.Length; i++)  //각 슬롯에 번호를 붙여주고 
@@ -63,103 +57,28 @@ public class Inventory : MonoBehaviour
             uiSlots[i].index = i;
             uiSlots[i].Clear();  //슬롯 클리어
         }
-
-        ClearSeletecItemWindow();
     }
 
-    public void OnInventoryButton(InputAction.CallbackContext callbackContext)
-    {
-        if (callbackContext.phase == InputActionPhase.Started)
-        {
-            Toggle();
-        }
-    }
-
-
-    public void Toggle()
-    {
-        if (inventoryWindow.activeInHierarchy)
-        {
-            inventoryWindow.SetActive(false);
-            onCloseInventory?.Invoke();
-          //  controller.ToggleCursor(false);
-        }
-        else
-        {
-            inventoryWindow.SetActive(true);
-            onOpenInventory?.Invoke();
-           // controller.ToggleCursor(true);
-        }
-    }
-
-    public bool IsOpen()
-    {
-        return inventoryWindow.activeInHierarchy;
-    }
+   
 
     public void AddItem(ItemData item)
     {
-        if (item.canStack)
-        {
-            ItemSlot slotToStackTo = GetItemStack(item);
-            if (slotToStackTo != null)
-            {
-                slotToStackTo.quantity++;
-                UpdateUI();
-                return;
-            }
-        }
-
-        ItemSlot emptySlot = GetEmptySlot();
-
-        if (emptySlot != null)
-        {
-            emptySlot.item = item;
-            emptySlot.quantity = 1;
-            UpdateUI();
-            return;
-        }
-
-        ThrowItem(item);
+        slots[item.itemNum].item = item;
+        //ItemSlot slotToStackTo = slots[item.itemNum]; //바로 고유번호 붙이기
+        UpdateUI(item.itemNum);
     }
 
-    void ThrowItem(ItemData item)
-    {
-        Instantiate(item.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360f));
-    }
-
-    void UpdateUI()
+    void UpdateUI(int itemNum) //고유번호의 아이템만 업로드 하도록
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i].item != null)
-                uiSlots[i].Set(slots[i]);
+            if (slots[itemNum].item != null)
+                uiSlots[itemNum].Set(slots[itemNum]);
             else
-                uiSlots[i].Clear();
+                uiSlots[itemNum].Clear();
         }
     }
 
-    ItemSlot GetItemStack(ItemData item)
-    {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (slots[i].item == item && slots[i].quantity < item.maxStackAmount)
-                return slots[i];
-        }
-
-        return null;
-    }
-
-    ItemSlot GetEmptySlot()
-    {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (slots[i].item == null)
-                return slots[i];
-        }
-
-        return null;
-    }
 
     public void SelectItem(int index)
     {
@@ -181,9 +100,7 @@ public class Inventory : MonoBehaviour
             selectedItemStatValues.text += selectedItem.item.consumables[i].value.ToString() + "\n";
         }
         useButton.SetActive(true);
-      //  useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
-      //  equipButton.SetActive(selectedItem.item.type == ItemType.Equipable && !uiSlots[index].equipped);
-      // unEquipButton.SetActive(selectedItem.item.type == ItemType.Equipable && uiSlots[index].equipped);
+      
         dropButton.SetActive(true);
     }
 
@@ -195,29 +112,43 @@ public class Inventory : MonoBehaviour
 
         selectedItemStatNames.text = string.Empty;
         selectedItemStatValues.text = string.Empty;
-
-        useButton.SetActive(false);
-       // equipButton.SetActive(false);
-       // unEquipButton.SetActive(false);
-        dropButton.SetActive(false);
+        inventoryInfo.SetActive(false);    
     }
 
     public void OnUseButton()
     {
-        if (selectedItem.item.type == ItemType.Consumable)
+
+        switch(selectedItem.item.itemNum)
         {
-            for (int i = 0; i < selectedItem.item.consumables.Length; i++)
-            {
-                switch (selectedItem.item.consumables[i].type)
-                {
-                  //  case ConsumableType.Health:
-                    //    condition.Heal(selectedItem.item.consumables[i].value); break;
-                   // case ConsumableType.Hunger:
-                     //   condition.Eat(selectedItem.item.consumables[i].value); break;
-                }
-            }
+            case 0:
+                Debug.Log("1번슬룻 아이템 사용");
+                break;
+            case 1:
+                Debug.Log("2번슬룻 아이템 사용");
+                break;
+            case 2:
+                Debug.Log("3번슬룻 아이템 사용");
+                break;
+            case 3:
+                Debug.Log("4번슬룻 아이템 사용");
+                break;
+            case 4:
+                Debug.Log("5번슬룻 아이템 사용");
+                break;
+            case 5:
+                Debug.Log("6번슬룻 아이템 사용");
+                break;
+            case 6:
+                Debug.Log("7번슬룻 아이템 사용");
+                break;
+            case 7:
+                Debug.Log("8번슬룻 아이템 사용");
+                break;
+
+
         }
-        RemoveSelectedItem();
+       
+        RemoveSelectedItem(selectedItem.item.itemNum);
     }
 
     public void OnEquipButton()
@@ -235,28 +166,17 @@ public class Inventory : MonoBehaviour
 
     }
 
-    public void OnDropButton()
+
+    private void RemoveSelectedItem(int itemNum)
     {
-        ThrowItem(selectedItem.item);
-        RemoveSelectedItem();
-    }
-
-    private void RemoveSelectedItem()
-    {
-        selectedItem.quantity--;
-
-        if (selectedItem.quantity <= 0)
-        {
-            if (uiSlots[selectedItemIndex].equipped)
-            {
-                UnEquip(selectedItemIndex);
-            }
-
+        //slots[itemNum].item.icon = GetComponent<image>();
+       // selectedItem.quantity--;                 
             selectedItem.item = null;
+         //  slots[itemNum].item.icon
             ClearSeletecItemWindow();
-        }
+        //텍스트를 하나 넣어서 사용이라고 뜨게하기
 
-        UpdateUI();
+        UpdateUI(itemNum);
     }
 
     public void RemoveItem(ItemData item)
